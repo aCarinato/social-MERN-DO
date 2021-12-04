@@ -26,10 +26,8 @@ export default function Login() {
           password,
         }
       );
-      router.push('/');
-      // setEmail('');
-      // setPassword('');
-      // setLoading(false);
+      console.log(data);
+      // router.push('/');
     } catch (err) {
       toast.error(err.response.data);
       setLoading(false);
