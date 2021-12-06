@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Modal } from 'antd';
 import Link from 'next/link';
+import { UserContext } from '../context';
 import { useRouter } from 'next/router';
 
 import AuthForm from '../components/forms/AuthForm';
@@ -11,6 +12,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const [state, setState] = useContext(UserContext);
 
   const router = useRouter();
 
@@ -26,8 +29,13 @@ export default function Login() {
           password,
         }
       );
-      console.log(data);
-      // router.push('/');
+      setState({
+        user: data.user,
+        token: data.token,
+      });
+      // save in local storage
+      window.localStorage.setItem('auth', JSON.stringify(data));
+      router.push('/');
     } catch (err) {
       toast.error(err.response.data);
       setLoading(false);
@@ -69,3 +77,6 @@ export default function Login() {
     </div>
   );
 }
+
+// Preston I'm a huge fan of yours. But don't you think the bitcoin space is starting to not live up to its values?
+// This is CENSORSHIP about objective facts that i stated.
