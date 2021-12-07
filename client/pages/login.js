@@ -26,13 +26,19 @@ export default function Login() {
         email,
         password,
       });
-      setState({
-        user: data.user,
-        token: data.token,
-      });
-      // save in local storage
-      window.localStorage.setItem('auth', JSON.stringify(data));
-      router.push('/');
+
+      if (data.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+        setState({
+          user: data.user,
+          token: data.token,
+        });
+        // save in local storage
+        window.localStorage.setItem('auth', JSON.stringify(data));
+        router.push('/');
+      }
     } catch (err) {
       toast.error(err.response.data);
       setLoading(false);
@@ -71,6 +77,14 @@ export default function Login() {
               <a>Register</a>
             </Link>
           </p>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col text-center">
+          <Link href="/forgot-password">
+            <a className="text-danger">Forgot password</a>
+          </Link>
         </div>
       </div>
     </div>
