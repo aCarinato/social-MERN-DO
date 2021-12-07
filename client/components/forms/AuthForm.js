@@ -90,8 +90,8 @@ export default function AuthForm({
         <button
           disabled={
             page === 'login'
-              ? !email || !password
-              : !name || !email || !password || !secret
+              ? !email || !password || loading
+              : !name || !email || !password || !secret || loading
           }
           className="btn btn-primary col-12"
         >

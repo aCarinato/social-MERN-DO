@@ -25,21 +25,24 @@ export default function Register() {
     // console.log(name, email, password, secret);
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/register`,
-        {
-          name,
-          email,
-          password,
-          secret,
-        }
-      );
-      setName('');
-      setEmail('');
-      setPassword('');
-      setSecret('');
-      setOk(data.ok);
-      setLoading(false);
+      const { data } = await axios.post(`/register`, {
+        name,
+        email,
+        password,
+        secret,
+      });
+
+      if (data.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+        setName('');
+        setEmail('');
+        setPassword('');
+        setSecret('');
+        setOk(data.ok);
+        setLoading(false);
+      }
     } catch (err) {
       toast.error(err.response.data);
       setLoading(false);
