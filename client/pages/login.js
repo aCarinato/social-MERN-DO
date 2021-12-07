@@ -79,6 +79,3 @@ export default function Login() {
     </div>
   );
 }
-
-// Preston I'm a huge fan of yours. But don't you think the bitcoin space is starting to not live up to its values?
-// This is CENSORSHIP about objective facts that i stated.
